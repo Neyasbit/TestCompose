@@ -1,0 +1,20 @@
+apply plugin: "io.gitlab.arturbosch.detekt"
+
+dependencies {
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.19.0")
+}
+
+def configFile = files("$rootDir/codequality/detekt.yml")
+
+detekt {
+    parallel = true
+    buildUponDefaultConfig = true
+    autoCorrect = true
+    config.setFrom(configFile)
+    input = files("src/")
+    reports {
+        html.enabled = true
+    }
+}
+
+lint.dependsOn "detekt"
