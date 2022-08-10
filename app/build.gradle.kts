@@ -1,20 +1,62 @@
 plugins {
-    id("android-app-convention")
+    id("com.android.application")
+    id("kotlin-android")
 }
 
+project.apply(from = "${project.rootDir}/codequality/detekt.gradle")
+
+android {
+    compileSdk = AppConfig.COMPILE_SDK
+
+    defaultConfig {
+        applicationId = AppConfig.applicationId
+        minSdk = AppConfig.MIN_SDK
+        targetSdk = AppConfig.TARGET_SDK
+        versionCode = AppConfig.VERSION_CODE
+        versionName = AppConfig.VERSION_NAME
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            isDebuggable = false
+
+            proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
+        }
+        debug {
+            isMinifyEnabled = true
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = AppConfig.jvmTarget
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.0"
+    }
+
+    packagingOptions {
+        resources {
+            excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+        }
+    }
+
+    android.sourceSets.all {
+        java.srcDirs("src/$name/kotlin")
+    }
+}
 dependencies {
-
-    implementation(Libs.AndroidX.CORE)
-    implementation(Libs.Compose.UI)
-    implementation(Libs.Compose.MATERIAL)
-    implementation(Libs.Compose.UI_PREVIEW)
-    implementation(Libs.AndroidX.LIFECYCLE_RUNTIME)
-    implementation(Libs.Compose.ACTIVITY)
-
-    testImplementation(Libs.Test.JUNIT)
-    androidTestImplementation(Libs.Test.ANDROID_JUNIT)
-    androidTestImplementation(Libs.Test.ESPRESSO)
-    androidTestImplementation(Libs.Test.COMPOSE_JUNIT)
-
-    debugImplementation(Libs.Compose.TOOLING)
+    implementation(project(Modules.Base.CORE))
 }

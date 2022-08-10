@@ -2,21 +2,21 @@
  * plugins used in the all modules project
  */
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
+    id("com.android.library")
+    kotlin("android")
 }
+
 
 project.apply(from = "${project.rootDir}/codequality/detekt.gradle")
 
+@Suppress("UnstableApiUsage")
 android {
     compileSdk = AppConfig.COMPILE_SDK
 
     defaultConfig {
-        applicationId = AppConfig.applicationId
+
         minSdk = AppConfig.MIN_SDK
         targetSdk = AppConfig.TARGET_SDK
-        versionCode = AppConfig.VERSION_CODE
-        versionName = AppConfig.VERSION_NAME
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -28,7 +28,6 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            isDebuggable = false
 
             proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
         }
@@ -60,4 +59,3 @@ android {
         java.srcDirs("src/$name/kotlin")
     }
 }
-
