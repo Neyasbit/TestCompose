@@ -5,3 +5,16 @@ plugins {
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}

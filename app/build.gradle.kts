@@ -56,7 +56,8 @@ android {
     android.sourceSets.all {
         java.srcDirs("src/$name/kotlin")
     }
+
 }
 dependencies {
-    implementation(project(Modules.Base.CORE))
+    implementation(project(Modules.Features.TIP_CALC))
 }

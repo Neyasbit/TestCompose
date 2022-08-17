@@ -10,8 +10,10 @@ dependencies {
     api(Libs.Compose.UI_PREVIEW)
     api(Libs.AndroidX.LIFECYCLE_RUNTIME)
     api(Libs.Compose.ACTIVITY)
+    api(Libs.Compose.VIEW_MODEL)
 
     testApi(Libs.Test.JUNIT)
+    testApi(Libs.Test.COROUTINES)
     androidTestApi(Libs.Test.ANDROID_JUNIT)
     androidTestApi(Libs.Test.ESPRESSO)
     androidTestApi(Libs.Test.COMPOSE_JUNIT)
