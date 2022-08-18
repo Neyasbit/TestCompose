@@ -59,5 +59,6 @@ android {
 
 }
 dependencies {
-    implementation(project(Modules.Features.TIP_CALC))
+    //implementation features
+    implementation(project(Modules.Base.CORE))
 }
